@@ -1,11 +1,5 @@
 # Simulación de un sistema de colas M/M/1 con SimPy
 
-![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
-![SimPy](https://img.shields.io/badge/SimPy-4.1-2a78d6)
-![NumPy](https://img.shields.io/badge/NumPy-2.5-013243?logo=numpy)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-3.11-eb6834)
-![Arquitectura](https://img.shields.io/badge/Arquitectura-MVC-1baf7a)
-
 Práctica N.º 03 de la asignatura **Simulación**, carrera de Computación de la
 Universidad Nacional de Loja. Simula una línea de espera M/M/1, anima en la consola
 cómo avanza la cola FIFO y compara los resultados simulados con los valores teóricos.
@@ -83,7 +77,7 @@ Se necesita una terminal que muestre colores ANSI: la de Linux, la de macOS o la
 
 ```bash
 # 1. Entrar a la carpeta del proyecto
-cd practica_mm1_mvc
+cd APE3
 
 # 2. (Recomendado) Crear y activar un entorno virtual
 python3 -m venv .venv
@@ -171,7 +165,7 @@ Para detener el programa: `Ctrl + C`.
 El proyecto sigue la arquitectura **MVC (Modelo – Vista – Controlador)**:
 
 ```
-practica_mm1_mvc/
+APE3/
 ├── main.py                 Configuración y punto de inicio
 ├── requirements.txt        Dependencias
 ├── modelo/                 Datos: solo clases con sus atributos
