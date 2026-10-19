@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Archivos de compilación
+build/
+dist/
+*.egg-info/
+*.class
+
+# Editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales y registros
+tmp/
+temp/
+*.tmp
+*.log
+*.bak
+*.swp
+~$*
+
+# Variables locales y credenciales
+.env
+.env.*
+!.env.example

@@ -1,7 +1,6 @@
-
-class Clima
-    def _init_(self, hora, temperatura, nubosidad, humedad):
+class Clima:
+    def __init__(self, hora, humedad, nubosidad, temperatura):
         self.hora = hora
         self.humedad = humedad
         self.nubosidad = nubosidad
-        self.tempratura = temperatura
+        self.temperatura = temperatura

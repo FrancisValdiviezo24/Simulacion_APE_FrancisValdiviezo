@@ -1,19 +1,7 @@
-
 class CalcularTemperatura:
-    def calcularFT (self, temperatura):
+    def calcular(self, temperatura):
         if temperatura <= 10:
-            return 1
-
+            return 1.0
         if temperatura >= 28:
-            return 0.10
-
-        if temperatura > 10 and temperatura < 28:
-            v_inicial = 10
-            factor = 1.0
-
-            while v_inicial <= temmperatura:
-
-                if valor % 2 == 0:
-                    return factor - 0.10
-
-                v_inicial += 1
+            return 0.1
+        return 1.0 - ((temperatura - 10) / 2) * 0.1

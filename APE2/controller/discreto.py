@@ -1,20 +1,10 @@
-import numpy as np
+def modelo_discreto(p0, tasa, periodos):
+    tiempo = list(range(periodos + 1))
+    poblacion = [p0]
 
-class Discreto(Simulacion):
+    for periodo in range(periodos):
+        poblacion_actual = poblacion[-1]
+        nueva_poblacion = poblacion_actual + tasa * poblacion_actual
+        poblacion.append(nueva_poblacion)
 
-    @abstractMethod
-    def modelo( self, p0, r, time):
-        poblacion = []
-
-        poblacion.append(p0)
-
-        for t in time:
-            ultimaPoblacion = poblacion [-1]
-
-            incremento = r*ultimaPoblacion
-
-            nuevaPoblacion = ultimaPoblacion + incremento 
-
-            poblacion.append(nuevaPoblacion)
-
-        return time, poblacion
+    return tiempo, poblacion

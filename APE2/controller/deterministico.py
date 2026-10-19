@@ -1,14 +1,7 @@
 import numpy as np
-class Deterministico(Simulacion):
 
-    @abstractMethod
-    def modelo (self, p0, r, t):
-        #t = np.arange(0, t +1)
-        
-        timpo = []
 
-        for time in t:
-            time = po * np.exp(r*time)
-            tiempo.append(time)
-
-        return time, tiempo
+def modelo_deterministico(p0, tasa, periodos):
+    tiempo = np.arange(0, periodos + 1)
+    poblacion = p0 * np.exp(tasa * tiempo)
+    return tiempo, poblacion

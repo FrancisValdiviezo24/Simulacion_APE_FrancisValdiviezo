@@ -1,15 +1,9 @@
-
 class Clasificar:
-    def clasifcar (self, indice):
+    def clasificar(self, indice):
         if indice < 0.40:
-            resp = "Sin Lluvia"
-            return resp
-        elif indice < 0.60:
-            resp = "Baja Posibilidad"
-            return resp
-        elif indice < 0.75:
-            resp = "Lluvia Propable"
-            return resp
-        else :
-            resp = "Lluvia"
-            return resp
+            return "Sin lluvia"
+        if indice < 0.60:
+            return "Baja posibilidad"
+        if indice < 0.75:
+            return "Lluvia probable"
+        return "Lluvia"

@@ -1,8 +1,6 @@
-
 class CalcularIndice:
-    def calcular_indice_base (self, Tf, N, H):
-        return (H * 0.5 + N * 0.3 + Tf * 0.2)
-    
-    def calcular_indice_ajustado (self, Tf, N,H):
-        return 0
-        
+    def base(self, h, n, tf):
+        return 0.5 * h + 0.3 * n + 0.2 * tf
+
+    def ajustado(self, h, n, tf):
+        return 0.45 * h + 0.4 * n + 0.15 * tf
