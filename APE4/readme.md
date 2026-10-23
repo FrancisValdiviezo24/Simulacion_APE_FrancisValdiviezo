@@ -39,7 +39,9 @@ lo solicitado. La visualización posterior corresponde a NetLogo.
 
 ## Parámetros y reglas
 
-Los parámetros están al inicio de `src/modelo/ModeloSIR.java`:
+Los parámetros editables están al inicio de `main`, en `src/Main.java`.
+Allí también se configuran la semilla y la ruta del CSV. `ModeloSIR` solo almacena
+los parámetros y el controlador los valida antes de simular:
 
 | Parámetro | Valor |
 | --- | --- |
@@ -83,6 +85,14 @@ Para la integración indicada en la guía, copia `resultados/resultados_java.csv
 para graficar S, I y R respecto al tiempo. Este proyecto cubre la implementación
 Java y su exportación; las implementaciones Python y NetLogo son partes separadas
 de la práctica.
+
+El CSV usa UTF-8, comas como separadores y valores enteros, sin filas de resumen
+ni mensajes mezclados con los datos. Al importarlo, se debe omitir el encabezado:
+la columna 0 corresponde al tiempo (eje X), y las columnas 1, 2 y 3 a S, I y R
+(eje Y). Estos conteos permiten graficar la evolución; no contienen posiciones ni
+identificadores para reconstruir el movimiento de personas individuales.
+Se verificó la estructura y la coherencia de los datos; la importación en una
+vista concreta de NetLogo queda pendiente porque este proyecto no incluye un `.nlogo`.
 
 La rúbrica menciona M/M/1, pero el fundamento, los parámetros y el procedimiento
 de la guía corresponden al modelo SIR, que es el implementado aquí.
