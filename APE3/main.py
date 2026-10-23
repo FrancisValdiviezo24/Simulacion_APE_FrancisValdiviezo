@@ -3,7 +3,7 @@ from controlador.controlador import ControladorMM1
 ESCENARIOS = [
     {"lam": 2.0, "mu": 3.0, "condicion": "Sistema estable"},
     {"lam": 2.5, "mu": 3.0, "condicion": "Mayor utilización"},
-    {"lam": 2.9, "mu": 3.0, "condicion": "Cerca de saturación"},
+    {"lam": 2.9999, "mu": 3.0, "condicion": "Cerca de saturación"},
 ]
 
 TIEMPO_SIMULACION = 20_000

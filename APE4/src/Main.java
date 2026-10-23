@@ -1,0 +1,26 @@
+import controlador.ControladorSimulacion;
+import java.io.IOException;
+import java.nio.file.Path;
+
+public class Main {
+    public static void main(String[] args) {
+        if (args.length > 1) {
+            System.err.println("Uso: java -cp out Main [semilla_entera]");
+            System.exit(1);
+        }
+        try {
+            // Una semilla fija permite repetir el experimento.
+            long semilla = args.length == 1 ? Long.parseLong(args[0]) : 42L;
+            Path archivo = Path.of("resultados", "resultados_java.csv");
+            new ControladorSimulacion().ejecutar(semilla, archivo);
+            System.out.println("CSV generado: " + archivo.toAbsolutePath());
+            System.out.println("Semilla utilizada: " + semilla);
+        } catch (NumberFormatException e) {
+            System.err.println("La semilla debe ser un número entero válido de tipo long.");
+            System.exit(1);
+        } catch (IOException e) {
+            System.err.println("No se pudo guardar el CSV: " + e.getMessage());
+            System.exit(1);
+        }
+    }
+}
