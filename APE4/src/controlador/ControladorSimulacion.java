@@ -69,24 +69,44 @@ public class ControladorSimulacion {
         return poblacion;
     }
 
+    // Fórmula de la guía: beta * S * I / N (contagios esperados por paso).
+    private double calcularContagiosEsperados(int susceptibles, int infectados) {
+        return parametros.beta * susceptibles * infectados / parametros.poblacion;
+    }
+
+    // Fórmula de la guía: gamma * I (recuperaciones esperadas por paso).
+    private double calcularRecuperacionesEsperadas(int infectados) {
+        return parametros.gamma * infectados;
+    }
+
     private Estado[] avanzarPaso(Estado[] poblacion) {
         Estado[] siguiente = poblacion.clone();
+        Resultado actual = contarEstados(0, poblacion);
 
+        double contagios = calcularContagiosEsperados(actual.susceptibles, actual.infectados);
+        double recuperaciones = calcularRecuperacionesEsperadas(actual.infectados);
+
+        // Por individuo: p(contagio) = beta * I / N; p(recuperación) = gamma.
+        // Evitamos dividir entre cero cuando un grupo está vacío.
+        double probabilidadContagio = 0;
+        if (actual.susceptibles > 0) {
+            probabilidadContagio = contagios / actual.susceptibles;
+        }
+
+        double probabilidadRecuperacion = 0;
+        if (actual.infectados > 0) {
+            probabilidadRecuperacion = recuperaciones / actual.infectados;
+        }
+
+        // Cambios esperados: dS = -contagios; dI = contagios - recuperaciones;
+        // dR = recuperaciones. Los cambios reales se sortean, sin redondear las tasas.
         for (int persona = 0; persona < parametros.poblacion; persona++) {
-            if (poblacion[persona] == Estado.INFECTADO) {
-                // Un contacto por infectado y por paso, excluyendo a sí mismo.
-                if (parametros.poblacion > 1) {
-                    int contacto = aleatorio.nextInt(parametros.poblacion - 1);
-                    if (contacto >= persona) {
-                        contacto++;
-                    }
-                    if (poblacion[contacto] == Estado.SUSCEPTIBLE
-                            && aleatorio.nextDouble() < parametros.beta) {
-                        siguiente[contacto] = Estado.INFECTADO;
-                    }
+            if (poblacion[persona] == Estado.SUSCEPTIBLE) {
+                if (aleatorio.nextDouble() < probabilidadContagio) {
+                    siguiente[persona] = Estado.INFECTADO;
                 }
-
-                if (aleatorio.nextDouble() < parametros.gamma) {
+            } else if (poblacion[persona] == Estado.INFECTADO) {
+                if (aleatorio.nextDouble() < probabilidadRecuperacion) {
                     siguiente[persona] = Estado.RECUPERADO;
                 }
             }

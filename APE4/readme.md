@@ -53,19 +53,25 @@ los parámetros y el controlador los valida antes de simular:
 | Gamma: probabilidad de recuperación por paso | 0,10 |
 | Pasos de simulación | 100 |
 
-La guía permite contactos cercanos o seleccionados, sin especificar su cantidad.
-Aquí cada infectado selecciona **un contacto aleatorio por paso**, entre las otras
-99 personas. Si el contacto es susceptible, se sortea un contagio con probabilidad
-beta. Luego se sortea la recuperación del infectado con probabilidad gamma.
-Personas diferentes pueden seleccionar el mismo contacto; solo se cambia su estado
-una vez. Para comparar herramientas se debe usar esta misma regla en todas ellas.
+Las fórmulas están separadas en dos métodos de `ControladorSimulacion`:
+
+- `calcularContagiosEsperados(S, I)`: beta * S * I / N.
+- `calcularRecuperacionesEsperadas(I)`: gamma * I.
+
+Se utiliza un paso de tiempo de una unidad. Los valores esperados se dividen por
+el tamaño de cada grupo para obtener las probabilidades individuales:
+`p(contagio) = beta * I / N` y `p(recuperación) = gamma`.
+Se sortea cada cambio de estado con esas probabilidades, conservando conteos enteros.
+Los grupos vacíos se manejan sin divisiones entre cero.
+Esta regla reemplaza la selección de un contacto por infectado. Para comparar las
+herramientas, Python y NetLogo deberán usar también esta regla.
 
 Se lee la población al inicio del paso y se escriben los cambios en una copia.
 Así, un nuevo infectado comienza a contagiar y puede recuperarse desde el siguiente
 paso. Un infectado que se recupera en el paso todavía puede transmitir durante ese
 paso. Los recuperados no vuelven a infectarse.
 
-Esta es una simulación aleatoria de individuos, siguiendo el pseudocódigo de la guía;
+Esta es una simulación aleatoria de individuos, con actualización simultánea de estados;
 no es una integración numérica de las ecuaciones diferenciales. Las cantidades son
 enteras y siempre se conserva `S + I + R = 100`.
 
